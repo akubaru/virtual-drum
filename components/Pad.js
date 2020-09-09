@@ -79,7 +79,7 @@ class Pad extends React.Component {
                     onClick={this.clickHandler}
                     style={this.state.styleToggle}>
                         <p>{this.props.keyTrigger}</p>
-                        <audio src={this.props.src}
+                        <audio src={this.props.url}
                             className="clip"
                             id={this.props.keyTrigger}
                             ref={ref => this.audio = ref}>
