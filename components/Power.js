@@ -24,19 +24,15 @@ class Power extends React.Component {
                 styleToggle: activeStyle
             })
         }
-        this.props.bankHandler();
+        this.props.onClick();
     }
     render() {
         return (
-            <div className="power-container">
+            <div>
                 <p>POWER</p>
-                <div className="power-slider-container">
-                    <div 
-                        className="select"
-                        onClick={this.powerToggle.bind(this)}
-                        style={this.state.styleToggle}>
+                    <div className="select" onClick={this.powerToggle.bind(this)}>
+                        <div style={this.state.styleToggle} className="inner" />
                     </div>
-                </div>
             </div>
         )
     }

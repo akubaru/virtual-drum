@@ -1,8 +1,10 @@
 import React from "react";
 import Bank from "../components/Bank";
 import Power from "../components/Power";
-import Pad from "../components/Pad";
+import PadBank from "../components/Pad";
 import Volume from "../components/Volume";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import "./App.css";
 
 const bankOne = [{
@@ -109,6 +111,11 @@ class App extends React.Component {
             display: 'Press Key',
             slideVal: 0.3
         }
+        this.displayHandler = this.displayHandler.bind(this);
+        this.powerHandler = this.powerHandler.bind(this);
+        this.bankHandler = this.bankHandler.bind(this);
+        this.volumeHandler = this.volumeHandler.bind(this);
+        this.clearDisplay = this.clearDisplay.bind(this);
     }
     bankHandler() {
         if (this.state.soundBank === bankOne) {
@@ -158,36 +165,32 @@ class App extends React.Component {
             sound.volume = this.state.slideVal
         });
         return (
+          <div>
             <div className="inner-container" id="drum-machine">
                 {/* <div id="display"> */}
-                    <div className="grid-container">
-                        <div className="pad-grid">
-                        {this.state.soundBank.map(e => (
-                            <Pad id={e.id}
-                                keyTrigger={e.keyTrigger}
-                                src={e.url}
-                                displayHandler={this.displayHandler}
-                                keyCode={e.keyCode}
-                                powerStatus={this.state.power}
-                                clearDisplay={this.clearDisplay} />
-                        ))}
-                        </div>
+                        <PadBank
+                            displayHandler={this.displayHandler}
+                            powerStatus={this.state.power}
+                            currentPadBank={this.state.soundBank} />
                         <div className="controls-container">
-                            <div className="control">
-                                <Bank bankHandler={this.bankHandler} powerStatus={this.state.power} />
-                            </div>
+                            <p id="display">{this.state.display}</p>
+                            <Volume display={this.state.display}
+                                slideVal={this.state.slideVal}
+                                volumeHandler={this.volumeHandler} />
                             <div className="control">
                                 <Power onClick={this.powerHandler}
                                 powerStatus={this.clearDisplay} />
                             </div>
-                            <p id="display" className='chord-label'>{this.state.display}</p>
-                            <Volume display={this.state.display}
-                                slideVal={this.state.slideVal}
-                                volumeHandler={this.volumeHandler} />
+                            <div className="control">
+                                <Bank bankHandler={this.bankHandler} powerStatus={this.state.power} />
+                            </div>
                         </div>
-                    </div>
                 {/* </div> */}
             </div>
+            <div className="footer">
+          Made by _<a className="button" target="_blank" href="https://github.com/akubaru">Akbar </a><FontAwesomeIcon icon={faGithub} size="lg"/>
+                </div>
+          </div>
         )
     }
 }

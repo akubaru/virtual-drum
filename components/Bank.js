@@ -30,15 +30,11 @@ class Bank extends React.Component {
     }
     render() {
         return (
-            <div className="bank-container">
+            <div>
                 <p>BANK</p>
-                <div className="bank-slider-container">
-                    <div 
-                        className="select"
-                        onClick={this.bankToggle.bind(this)}
-                        style={this.state.styleToggle}>
+                    <div className="select" onClick={this.bankToggle.bind(this)} >
+                        <div style={this.state.styleToggle} className="inner" />
                     </div>
-                </div>
             </div>
         )
     }

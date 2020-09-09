@@ -1,12 +1,15 @@
 import React from "react";
 
 const inactiveStyle = {
-    backgroundColor: '#C6C6C6',
-    boxShadow: '1px 1px 3px 0 hsla(0,0%,97%,.67), 1px 1px 3px 0 #eee'
+    backgroundColor: 'rgb(48, 180, 241)',
+    boxShadow: "0 3px rgb(48, 180, 241)",
+    height: 77,
+    marginTop: 13
 }
 const activeStyle = {
-    backgroundColor: 'blue',
-    boxShadow: '0 3px blue'
+    backgroundColor: 'grey',
+    marginTop: 10,
+    boxShadow: "3px 3px 5px black"
 }
 
 class Pad extends React.Component {
@@ -15,6 +18,9 @@ class Pad extends React.Component {
         this.state = {
             styleToggle: inactiveStyle
         }
+        this.clickHandler = this.clickHandler.bind(this);
+        this.padToggle = this.padToggle.bind(this);
+        this.keypressHandler = this.keypressHandler.bind(this);
     }
     padToggle() {
         if (this.props.powerStatus) {
@@ -25,6 +31,21 @@ class Pad extends React.Component {
             } else {
                 this.setState({
                     styleToggle: inactiveStyle
+                })
+            }
+        } else {
+            if (this.state.styleToggle === activeStyle) {
+                this.setState({
+                    styleToggle: inactiveStyle
+                })
+            } else {
+                this.setState({
+                    styleToggle: {
+                        height: 77,
+                        marginTop: 13,
+                        backgroundColor: 'grey',
+                        boxShadow: '0 3px grey'
+                    }
                 })
             }
         }
@@ -46,14 +67,13 @@ class Pad extends React.Component {
         if (this.props.powerStatus) {
             this.audio.play();
             this.audio.currentTime = 0;
-            this.props.displayHandler(this.props.id);
+            this.props.displayHandler(this.props.id.replace(/-/g, ' '));
             this.padToggle()
             setTimeout(() => this.padToggle(), 100)
         }
     }
     render() {
         return (
-            <div className="pad-bank">
                 <div className="drum-pad"
                     id={this.props.id}
                     onClick={this.clickHandler}
@@ -65,9 +85,49 @@ class Pad extends React.Component {
                             ref={ref => this.audio = ref}>
                         </audio>
                 </div>
+        )
+    }
+}
+
+class PadBank extends React.Component {
+    constructor(props) {
+        super(props)
+    }
+    render() {
+        let padBank;
+        if (this.props.powerStatus) {
+            padBank = this.props.currentPadBank.map((drumObj, i, padBankArr) => {
+                return (
+                    <Pad 
+                        id={padBankArr[i].id}
+                        url={padBankArr[i].url}
+                        keyTrigger={padBankArr[i].keyTrigger}
+                        keyCode={padBankArr[i].keyCode}
+                        displayHandler={this.props.displayHandler}
+                        powerStatus={this.props.powerStatus}
+                    />
+                )
+            })
+        } else {
+            padBank = this.props.currentPadBank.map((drumObj, i, padBankArr) => {
+                return (
+                    <Pad 
+                        id={padBankArr[i].id}
+                        url="#"
+                        keyTrigger={padBankArr[i].keyTrigger}
+                        keyCode={padBankArr[i].keyCode}
+                        displayHandler={this.props.displayHandler}
+                        powerStatus={this.props.displayHandler}
+                    />
+                )
+            })
+        }
+        return (
+            <div className="pad-bank">
+                {padBank}
             </div>
         )
     }
 }
 
-export default Pad;
+export default PadBank;

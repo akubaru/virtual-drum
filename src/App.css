@@ -8,7 +8,7 @@ body {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
-  background-color: #8d8d8d;
+  background-color: #333333;
 }
 
 #root {
@@ -25,11 +25,11 @@ body {
 }
 
 .inner-container {
-  outline: 5px solid orange;
+  outline: 5px solid rgb(255, 255, 255);
   position: relative;
   width: 660px;
   text-align: center;
-  background-color: #b3b3b3;
+  background-color: #8795a1;
 }
 
 .inner-container .pad-bank {
@@ -103,11 +103,26 @@ body {
 .inner-select, .inner-container .controls-container .control .select .inner {
   width: 23px;
   height: 19px;
-  background: blue;
+  background: rgb(48, 180, 241);
   border: 1px solid black;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   cursor: pointer;
+}
+
+.footer {
+  width: 450px;
+  text-align: center;
+  display: block;
+  margin: 15px auto 30px auto;
+  font-size: 0.8em;
+  color: #fff;
+}
+
+.footer a {
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
 }
 
 @media screen and (max-width: 650px) {
@@ -147,7 +162,7 @@ body {
   height: 25px;
   width: 8px;
   border-radius: 0;
-  background: blue;
+  background: rgb(21, 183, 247);
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -11px;
@@ -175,7 +190,7 @@ body {
   height: 25px;
   width: 8px;
   border-radius: 0;
-  background: blue;
+  background: rgb(21, 208, 255);
   cursor: pointer;
 }
 
@@ -211,7 +226,7 @@ body {
   height: 25px;
   width: 8px;
   border-radius: 0;
-  background: blue;
+  background: rgb(24, 201, 255);
   cursor: pointer;
 }
 
